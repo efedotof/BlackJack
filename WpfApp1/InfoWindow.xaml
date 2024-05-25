@@ -1,0 +1,23 @@
+﻿<Window x:Class="WpfApp1.InfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="InfoWindow" Height="300" Width="400" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
+    <!-- Создаем главный контейнер для содержимого окна -->
+    <Border Background="White" CornerRadius="20" BorderThickness="2" BorderBrush="Black" Padding="10">
+        <!-- Создаем панель StackPanel для вертикального размещения элементов -->
+        <StackPanel>
+            <!-- Заголовок окна -->
+            <TextBlock Text="BlackJack" FontSize="24" FontWeight="Bold" Margin="0,0,0,10" HorizontalAlignment="Center"/>
+            <!-- Текстовые блоки с правилами игры -->
+            <TextBlock Text="Правила игры и ставок:" FontSize="18" FontWeight="Bold" Margin="0,0,0,5"/>
+            <TextBlock Text="1. Цель игры - набрать 21 очко или ближе всего к 21." TextWrapping="Wrap" Margin="0,0,0,5"/>
+            <TextBlock Text="2. Карты от 2 до 10 имеют свою номинальную стоимость." TextWrapping="Wrap" Margin="0,0,0,5"/>
+            <TextBlock Text="3. Валет, дама и король стоят по 10 очков." TextWrapping="Wrap" Margin="0,0,0,5"/>
+            <TextBlock Text="4. Туз стоит 1 или 11 очков." TextWrapping="Wrap" Margin="0,0,0,5"/>
+            <!-- Информация об авторе -->
+            <TextBlock Text="Автор: Твое Имя" FontStyle="Italic" Margin="0,10,0,0" HorizontalAlignment="Right"/>
+            <!-- Кнопка для закрытия окна -->
+            <Button Content="Закрыть" HorizontalAlignment="Center" Margin="0,10,0,0" Click="CloseButton_Click"/>
+        </StackPanel>
+    </Border>
+</Window>

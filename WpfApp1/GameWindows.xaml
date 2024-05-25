@@ -1,0 +1,125 @@
+﻿<Window x:Class="WpfApp1.GameWindows"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="GameWindows" Height="500" Width="820">
+
+    <Grid>
+        <!-- Установка фона для игрового стола -->
+        <Grid.Background>
+            <ImageBrush ImageSource="/OtherImage/blackjack_table.png"/>
+        </Grid.Background>
+        <!-- Определение столбцов и строк сетки -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="67*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Кнопка для начала игры -->
+        <Button x:Name="StartButton" Content="Deal'em" Click="StartButton_Click" Margin="187,10,64,10">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <!-- Карты игрока и дилера -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" RenderTransformOrigin="0.506,0.506">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="419*" />
+                <ColumnDefinition Width="63*" />
+                <ColumnDefinition Width="356*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Кнопки для пасса и взятия карты -->
+            <WrapPanel x:Name="elementHideDouble" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="312,312,0,82" Width="232" Orientation="Horizontal" Visibility="Collapsed" Height="100">
+                <Button x:Name="StandButton" Content="Stand" Click="StandButton_Click" Width="116" Height="40" Background="#FFFF1717">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="HitButton" Content="Hit" Click="HitButton_Click" Width="116" Height="40" Background="#FF6AC849">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="10">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </WrapPanel>
+            <!-- Карты игрока -->
+            <WrapPanel x:Name="PlayerCards" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" MaxHeight="100" />
+
+            <!-- Карты дилера -->
+            <WrapPanel x:Name="DealerCards" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MaxHeight="100" Margin="146,0,0,0" />
+
+            <!-- Панель для ставок -->
+            <Border x:Name="CurrentBetsPanel" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Height="102" Width="225" Margin="275,95,0,0" Background="#FFEDDFEF" CornerRadius="10">
+                <WrapPanel x:Name="CurrentBetsPanels" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <!-- Текст с текущей ставкой -->
+                    <TextBlock x:Name="BetTextBlock" Text="Current Bet: 0" Margin="0 10" FontSize="14"/>
+                    <!-- Кнопки для добавления различных сумм ставки -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="100" Click="AddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="250" Click="AddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="1000" Click="AddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="2500" Click="AddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="5000" Click="AddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                    </StackPanel>
+                    <!-- Кнопки для уменьшения ставки -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Content="-100" Click="RemoveAddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="-250" Click="RemoveAddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="-1000" Click="RemoveAddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="-2500" Click="RemoveAddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                        <Button Content="-5000" Click="RemoveAddBet_Click" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Cursor="Hand"/>
+                    </StackPanel>
+                </WrapPanel>
+            </Border>
+
+            <!-- Метка для отображения текущей ставки -->
+            <Label x:Name="Bets" Content="Текущая ставка: 0$" HorizontalAlignment="Left" Margin="10,302,0,55" Foreground="White" FontSize="20"/>
+
+            <!-- Метка для отображения суммы в банке -->
+            <Label x:Name="BankLabel" Grid.Column="2" Content="Банк: 1000$" Margin="174,302,49,55" Foreground="White" FontSize="20"/>
+            <WrapPanel/>
+        </Grid>
+
+        <!-- Кнопка "Уйти" -->
+        <Button x:Name="giveUp" Grid.Column="1" Content="Уйти" HorizontalAlignment="Left" Margin="8,10,0,6" Foreground="White" Background="#FFEC1818" Click="giveUp_Click" Width="120">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>
