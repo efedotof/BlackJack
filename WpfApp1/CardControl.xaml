@@ -8,8 +8,16 @@
     <Viewbox>
         <Grid Width="100" Height="150">
             <Rectangle Fill="White" RadiusX="5" RadiusY="5"/>
-            <Image x:Name="CardImage" Stretch="Uniform"/>
-            <Rectangle x:Name="HiddenCardCover" Fill="Gray" RadiusX="5" RadiusY="5" Visibility="Collapsed"/>
+            <Image x:Name="CardImage" Stretch="Uniform">
+                <Image.OpacityMask>
+                    <ImageBrush ImageSource="CardImages/back.png"/>
+                </Image.OpacityMask>
+            </Image>
+            <Rectangle x:Name="HiddenCardCover" RadiusX="5" RadiusY="5" Visibility="Collapsed">
+                <Rectangle.Fill>
+                    <ImageBrush Stretch="Fill" ImageSource="CardImages/back.png"/>
+                </Rectangle.Fill>
+            </Rectangle>
         </Grid>
     </Viewbox>
 </UserControl>
